@@ -1,0 +1,13 @@
+package com.retail.rewards.exception;
+
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+ @ExceptionHandler(CustomerNotFoundException.class)
+ public ResponseEntity<Map<String,String>> handleCustomerNotFound(CustomerNotFoundException ex){ return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", ex.getMessage()));}
+ @ExceptionHandler(IllegalArgumentException.class)
+ public ResponseEntity<Map<String,String>> handleIllegalArgument(IllegalArgumentException ex){ return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));}
+}
