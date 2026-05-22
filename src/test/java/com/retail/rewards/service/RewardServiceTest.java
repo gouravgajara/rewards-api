@@ -3,6 +3,7 @@ package com.retail.rewards.service;
 import com.retail.rewards.entity.Transaction;
 import com.retail.rewards.exception.CustomerNotFoundException;
 import com.retail.rewards.repository.TransactionRepository;
+import com.retail.rewards.service.impl.RewardServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class RewardServiceTest {
  @Mock private TransactionRepository transactionRepository;
- @InjectMocks private RewardService rewardService;
+ @InjectMocks private RewardServiceImpl rewardService;
  @Test void shouldCalculateRewardPointsAbove100(){ assertEquals(90,rewardService.calculateRewardPoints(120.0));}
  @Test void shouldCalculateRewardPointsBetween50And100(){ assertEquals(25,rewardService.calculateRewardPoints(75.0));}
  @Test void shouldReturnZeroPoints(){ assertEquals(0,rewardService.calculateRewardPoints(40.0));}
