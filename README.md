@@ -48,7 +48,7 @@ mvn spring-boot:run
 ### Get All Rewards
 
 ```http
-GET /api/rewards
+GET /api/rewards/all
 ```
 
 ### Sample Response
@@ -61,10 +61,56 @@ GET /api/rewards
     "monthlyRewards": [
       {
         "month": "May",
+        "points": 250
+      },
+      {
+        "month": "March",
         "points": 90
+      },
+      {
+        "month": "April",
+        "points": 25
       }
     ],
-    "totalRewards": 90
+    "totalRewards": 365
+  },
+  {
+    "customerId": 102,
+    "customerName": "Smith",
+    "monthlyRewards": [
+      {
+        "month": "May",
+        "points": 110
+      },
+      {
+        "month": "March",
+        "points": 0
+      },
+      {
+        "month": "April",
+        "points": 45
+      }
+    ],
+    "totalRewards": 155
+  },
+  {
+    "customerId": 103,
+    "customerName": "Justin",
+    "monthlyRewards": [
+      {
+        "month": "May",
+        "points": 70
+      },
+      {
+        "month": "March",
+        "points": 30
+      },
+      {
+        "month": "April",
+        "points": 10
+      }
+    ],
+    "totalRewards": 110
   }
 ]
 ```
@@ -84,10 +130,18 @@ GET /api/rewards/101
   "monthlyRewards": [
     {
       "month": "May",
+      "points": 250
+    },
+    {
+      "month": "March",
       "points": 90
+    },
+    {
+      "month": "April",
+      "points": 25
     }
   ],
-  "totalRewards": 90
+  "totalRewards": 365
 }
 ```
 
