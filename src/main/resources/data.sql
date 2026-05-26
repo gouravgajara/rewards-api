@@ -1,1 +1,11 @@
-INSERT INTO transactions (id, customer_id, customer_name, amount, transaction_date) VALUES (1,101,'John',120.0,CURRENT_DATE - 60),(2,101,'John',75.0,CURRENT_DATE - 30),(3,101,'John',200.0,CURRENT_DATE),(4,102,'Smith',45.0,CURRENT_DATE - 60),(5,102,'Smith',95.0,CURRENT_DATE - 30),(6,102,'Smith',130.0,CURRENT_DATE);
+INSERT INTO transactions (id, customer_id, customer_name, amount, transaction_date) VALUES
+(1,101,'John',120.0,CURRENT_DATE - 60),
+(2,101,'John',75.0,CURRENT_DATE - 30),
+(3,101,'John',200.0,CURRENT_DATE),
+(4,102,'Smith',45.0,CURRENT_DATE - 60),
+(5,102,'Smith',95.0,CURRENT_DATE - 30),
+(6,102,'Smith',130.0,CURRENT_DATE),
+(7,103,'Justin',80.0,CURRENT_DATE - 60),
+(8,103,'Justin',60.0,CURRENT_DATE - 30),
+(9,103,'Justin',110.0,CURRENT_DATE),
+(10,103,'Justin',110.0,CURRENT_DATE - 90);
