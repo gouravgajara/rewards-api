@@ -1,8 +1,11 @@
 package com.retail.rewards.controller;
 
 import com.retail.rewards.dto.RewardResponse;
-import com.retail.rewards.service.IRewardService;
-import org.springframework.web.bind.annotation.*;
+import com.retail.rewards.service.RewardService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -10,13 +13,13 @@ import java.util.List;
 @RequestMapping("/api/rewards")
 public class RewardController {
 
-    private final IRewardService rewardService;
+    private final RewardService rewardService;
 
-    public RewardController(IRewardService rewardService) {
+    public RewardController(RewardService rewardService) {
         this.rewardService = rewardService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<RewardResponse> getRewards() {
         return rewardService.getRewards();
     }
