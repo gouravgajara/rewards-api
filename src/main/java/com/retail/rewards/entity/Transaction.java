@@ -1,6 +1,9 @@
 package com.retail.rewards.entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
@@ -13,7 +16,8 @@ public class Transaction {
     private Double amount;
     private LocalDate transactionDate;
 
-    public Transaction() {}
+    public Transaction() {
+    }
 
     public Transaction(Long id, Long customerId, String customerName, Double amount, LocalDate transactionDate) {
         this.id = id;
@@ -23,9 +27,23 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public Long getId() { return id; }
-    public Long getCustomerId() { return customerId; }
-    public String getCustomerName() { return customerName; }
-    public Double getAmount() { return amount; }
-    public LocalDate getTransactionDate() { return transactionDate; }
+    public Long getId() {
+        return id;
+    }
+
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public LocalDate getTransactionDate() {
+        return transactionDate;
+    }
 }
