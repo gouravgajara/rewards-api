@@ -4,12 +4,18 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+
   h2:
     console:
       enabled: true
+
   jpa:
     hibernate:
       ddl-auto: create-drop
     defer-datasource-initialization: true
+
 server:
   port: 8080
+
+rewards:
+  months: 3
