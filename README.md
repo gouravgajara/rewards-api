@@ -12,19 +12,6 @@ Spring Boot REST API for calculating customer reward points based on transaction
 - JUnit 5
 - Mockito
 
-## Project Structure
-
-```
-src/main/java/com/retail/rewards
-│── controller
-│── dto
-│── entity
-│── exception
-│── repository
-│── service
-│   └── impl
-```
-
 ## H2 Database
 
 H2 console:
@@ -174,3 +161,6 @@ Example:
 Transaction Amount = 120
 Reward Points = 90
 ```
+
+# Author
+Gourav Gajara
