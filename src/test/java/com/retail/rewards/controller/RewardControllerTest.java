@@ -3,7 +3,7 @@ package com.retail.rewards.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.retail.rewards.dto.MonthlyReward;
 import com.retail.rewards.dto.RewardResponse;
-import com.retail.rewards.service.IRewardService;
+import com.retail.rewards.service.RewardService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -27,7 +28,7 @@ class RewardControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private IRewardService rewardService;
+    private RewardService rewardService;
 
     @Test
     void shouldReturnRewards() throws Exception {
@@ -40,7 +41,7 @@ class RewardControllerTest {
 
         when(rewardService.getRewards()).thenReturn(List.of(response));
 
-        mockMvc.perform(get("/api/rewards")
+        mockMvc.perform(get("/api/rewards/all")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].customerId").value(101))
@@ -65,4 +66,53 @@ class RewardControllerTest {
                 .andExpect(jsonPath("$.customerId").value(101))
                 .andExpect(jsonPath("$.totalRewards").value(90));
     }
+
+
+    @Test
+    void shouldReturnEmptyListWhenNoRewards() throws Exception {
+
+        when(rewardService.getRewards()).thenReturn(List.of());
+
+        mockMvc.perform(get("/api/rewards/all")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
+    @Test
+    void shouldReturnBadRequestForInvalidCustomerId() throws Exception {
+
+        mockMvc.perform(get("/api/rewards/invalid"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void shouldReturnMonthlyRewardsStructure() throws Exception {
+
+        RewardResponse response = new RewardResponse(
+                101L,
+                "John",
+                List.of(new MonthlyReward("May", 90L)),
+                90L
+        );
+
+        when(rewardService.getRewardsByCustomerId(101L)).thenReturn(response);
+
+        mockMvc.perform(get("/api/rewards/101"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.monthlyRewards[0].month").value("May"))
+                .andExpect(jsonPath("$.monthlyRewards[0].points").value(90));
+    }
+
+    @Test
+    void shouldCallServiceMethod() throws Exception {
+
+        when(rewardService.getRewards()).thenReturn(List.of());
+
+        mockMvc.perform(get("/api/rewards/all"))
+                .andExpect(status().isOk());
+
+        verify(rewardService).getRewards();
+    }
+
 }
